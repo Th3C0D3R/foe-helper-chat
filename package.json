@@ -1,0 +1,22 @@
+{
+  "name": "foe-helper-chat",
+  "version": "1.0.0",
+  "description": "Foe-Helper Chat Server",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Th3C0D3R/foe-helper-chat.git"
+  },
+  "author": "TH3C0D3ER",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Th3C0D3R/foe-helper-chat/issues"
+  },
+  "homepage": "https://github.com/Th3C0D3R/foe-helper-chat#readme",
+  "dependencies": {
+    "ws": "^7.3.0"
+  }
+}
