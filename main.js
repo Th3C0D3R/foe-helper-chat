@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const WebSocket = require("ws");
 const fs = require("fs");
 const https = require("https");
+var express = require("express");
 /**
  * Communication:
  *
@@ -43,6 +44,7 @@ const WEBSOCKET_SERVER_USE_HTTPS = false;
 const WEBSOCKET_SERVER_CERTIFICAT_FILE = '/path/to/cert.pem';
 const WEBSOCKET_SERVER_PRIVATE_KEY_FILE = '/path/to/key.pem';
 const WEBSOCKET_SERVER_PORT = 9000;
+
 function secretsMatch(state1, state2) {
     return state1.secret !== null && state1.secret === state2.secret;
 }
@@ -104,11 +106,13 @@ const wss = (() => {
         });
         const wss = new WebSocket.Server({ server });
         server.listen(WEBSOCKET_SERVER_PORT);
-	console.log("Running WS Server as HTTPS");
+        console.log("Running WS Server as HTTPS at Port %s", WEBSOCKET_SERVER_PORT);
+        startWebServer("Running WS Server as HTTPS at Port " + WEBSOCKET_SERVER_PORT)
         return wss;
     }
     else {
-console.log("Running WS Server as HTTP");
+        console.log("Running WS Server as HTTP at Port %s", WEBSOCKET_SERVER_PORT);
+        startWebServer("Running WS Server as HTTP at Port " + WEBSOCKET_SERVER_PORT)
         return new WebSocket.Server({ port: WEBSOCKET_SERVER_PORT });
     }
 })();
@@ -330,4 +334,16 @@ wss.on('connection', function connection(ws) {
         }
     });
 });
+function startWebServer(text) {
+    var app = express();
+    app.get("/", function (req, res) {
+        res.send(text);
+    });
+    var wserver = app.listen(80, function () {
+        var host = wserver.address().address;
+        var port = wserver.address().port;
+
+        console.log("webserver listening at http://%s:%s", host, port);
+    });
+}
 //# sourceMappingURL=main.js.map
