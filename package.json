@@ -4,7 +4,7 @@
   "description": "Foe-Helper Chat Server",
   "main": "main.js",
   "scripts": {
-    "start": "node ."
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
